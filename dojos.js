@@ -157,3 +157,65 @@ function modifiedSum(a, n) {
 }
 
 console.log(modifiedSum([1, 2, 3], 3));
+console.clear();
+function solution(fullText, searchText) {
+    let occurrences = 0;
+    for (let i = 0; i <= fullText.length - searchText.length; i++) {
+        if (fullText.slice(i, i + searchText.length) === searchText) {
+            occurrences++;
+        }
+    }
+    return occurrences;
+}
+console.log(solution('abcdeb', 'b'));
+function removeUrlAnchor(url) {
+    return url.indexOf('#') !== -1 ? url.slice(0, url.indexOf('#')) : url;
+}
+console.log(removeUrlAnchor('www.codewars.com/katas/'));
+function noOdds(values) {
+    return values.filter((number) => number % 2 === 0);
+}
+console.clear();
+console.log(noOdds([0, 1]));
+function sumDigits(number) {
+    let sum = 0;
+    JSON.stringify(Math.abs(number)).split('').forEach((number) => sum += parseInt(number));
+    return sum;
+}
+console.log(sumDigits(10));
+function spam(number) {
+    //TODO: Not returning the expected value.
+    let string = 'hue';
+    [...Array(number - 1)].forEach(() => string += 'hue');
+    return string;
+}
+console.log(spam(1));
+function disemvowel(str) {
+    let vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+    return str.split('').filter((char) => !vowels.includes(char)).join('');
+}
+console.log(disemvowel("No offense but,\nYour writing is among the worst I've ever read"));
+var capitals = function (word) {
+    let indexes = [];
+    word.split('').forEach((char, index) => {
+        if (/^[A-Z]*$/.test(char)) indexes.push(index);
+    });
+    return indexes;
+};
+console.log(capitals('CodEWaRs'));
+console.clear();
+
+const fs = require('fs');
+const csv = require('jquery-csv');
+const cities = getCitiesFromLocalCsv();
+
+
+function getCitiesFromLocalCsv() {
+    let cities = [];
+    const rawData = fs.readFileSync('worldcities.csv', 'utf8');
+    let data = csv.toObjects(rawData);
+    Object.entries(data).forEach((key, value) => cities.push(key[1].city))
+    return cities;
+}
+console.log(JSON.parse(JSON.stringify(cities)));
+fs.writeFileSync('cities.json', JSON.stringify(cities))
